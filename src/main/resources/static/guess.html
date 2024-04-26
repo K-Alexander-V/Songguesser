@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet"  type="text/css" href="styleG.css"/>
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Songguesser</title>
+	<script type="text/javascript">
+	function submitform(){
+        alert("Sending Json");
+        var formElement = document.querySelector("form");
+        var formData = new FormData(formElement);
+        var jsonObject = {};
+        for(const [key,value] of formData.entries()){
+        	jsonObject[key] = value;
+        }
+		alert (JSON.stringify(jsonObject));	
+	
+		fetch(formElement.action,{
+		method: formElement.method,
+		headers: {
+			'Content-Type': 'application/json'
+		},
+	
+		body: JSON.stringify(jsonObject)
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+		})
+	}
+	 
+	 </script>
+</head>
+<body >
+	
+	
+	<form action="http://localhost:8080/teamguesses/guesses" method="POST" name="Songguesser">
+		<h1>Song-Schnüffler </h1>
+		<p> Wer bin ich? </p>
+		
+		
+		<label class="selecter">
+		 <select name="guesser" size="1"> 
+			
+			<option>	Aiham Nassr Edin		</option>
+      		<option>	Alexander Pavlovski		</option>
+     		<option>	Alicia Kästner			</option>
+     		<option>	André Haucke			</option>
+      		<option>	Arjuna Wolfsteller		</option>
+      		<option>	Bastian Wecke			</option>
+      		<option>	Belinda Deskaj			</option>
+     		<option>	Colin Hartkopf			</option>
+     		<option>	Faraz Behrouzieh		</option>
+      		<option>	Florian Theml			</option>
+      		<option>	Gerd Balzuweit			</option>
+      		<option>	Gunilla Kollotzek		</option>
+     		<option>	Guntram Kube			</option>
+     		<option>	Hannah Marie Freter		</option>
+      		<option>	Ilona Breidt			</option>
+      		<option>	Jan Buchholz			</option>
+      		<option>	Johannes Heyer			</option>
+     		<option>	Johannes Weigelt		</option>
+     		<option>	Jonas Bauch				</option>
+      		<option>	Jonas Franke			</option>
+      		<option>	Julia Sobol				</option>
+      		<option>	Julia Thrandorf			</option>
+     		<option>	Lars Johst				</option>
+     		<option>	Louis Roth				</option>
+      		<option>	Lukas Westholt			</option>
+      		<option>	Maik Müller				</option>
+      		<option>	Marcus Endtmann			</option>
+     		<option>	Maria Trümper			</option>
+     		<option>	Matthias Zober			</option>
+      		<option>	Maximilian Deutschmann	</option>
+      		<option>	Mike Kunert				</option>
+      		<option>	Moritz Meister			</option>
+     		<option>	Mykyta Turbal			</option>
+      		<option>	Nick-Felipe Hübenthal	</option>
+      		<option>	Patrick Noack			</option>
+      		<option>	Safeaulah Berhan		</option>
+     		<option>	Saqib Sawar	Satti		</option>
+     		<option>	Stefan Küttner			</option>
+      		<option>	Steffen Börner			</option>
+      		<option>	Steffen Wohlfarth		</option>
+      		<option>	Tanja Luther			</option>
+     		<option>	Tobias Mäde				</option>
+     		<option>	Tobias März				</option>
+      		<option>	Tobias Walter			</option>
+    
+		
+		</select>
+		</label>
+		
+		
+		<br>
+		
+		<p> Wer denkst du, hat sich das Lied gewünscht? </p>
+		
+		<label class="selecter">
+  		 
+  		 <select name="submitter" size="1"> 
+			
+			<option>	Aiham Nassr Edin		</option>
+      		<option>	Alexander Pavlovski		</option>
+     		<option>	Alicia Kästner			</option>
+     		<option>	André Haucke			</option>
+      		<option>	Arjuna Wolfsteller		</option>
+      		<option>	Bastian Wecke			</option>
+      		<option>	Belinda Deskaj			</option>
+     		<option>	Colin Hartkopf			</option>
+     		<option>	Faraz Behrouzieh		</option>
+      		<option>	Florian Theml			</option>
+      		<option>	Gerd Balzuweit			</option>
+      		<option>	Gunilla Kollotzek		</option>
+     		<option>	Guntram Kube			</option>
+     		<option>	Hannah Marie Freter		</option>
+      		<option>	Ilona Breidt			</option>
+      		<option>	Jan Buchholz			</option>
+      		<option>	Johannes Heyer			</option>
+     		<option>	Johannes Weigelt		</option>
+     		<option>	Jonas Bauch				</option>
+      		<option>	Jonas Franke			</option>
+      		<option>	Julia Sobol				</option>
+      		<option>	Julia Thrandorf			</option>
+     		<option>	Lars Johst				</option>
+     		<option>	Louis Roth				</option>
+      		<option>	Lukas Westholt			</option>
+      		<option>	Maik Müller				</option>
+      		<option>	Marcus Endtmann			</option>
+     		<option>	Maria Trümper			</option>
+     		<option>	Matthias Zober			</option>
+      		<option>	Maximilian Deutschmann	</option>
+      		<option>	Mike Kunert				</option>
+      		<option>	Moritz Meister			</option>
+     		<option>	Mykyta Turbal			</option>
+      		<option>	Nick-Felipe Hübenthal	</option>
+      		<option>	Patrick Noack			</option>
+      		<option>	Safeaulah Berhan		</option>
+     		<option>	Saqib Sawar	Satti		</option>
+     		<option>	Stefan Küttner			</option>
+      		<option>	Steffen Börner			</option>
+      		<option>	Steffen Wohlfarth		</option>
+      		<option>	Tanja Luther			</option>
+     		<option>	Tobias Mäde				</option>
+     		<option>	Tobias März				</option>
+      		<option>	Tobias Walter			</option>
+    
+		
+		</select>
+  		</label>
+  		
+  		<br>
+  		
+  		<p>Wie gut hat dir das Lied gefallen?</p>
+  		
+  		<label class="selecter">
+  		 
+  		 <select name="favor" size="1"> 
+			
+			<option>Gut!</option>
+      		<option>Okay!</option>
+      		<option>Gar nicht!</option>
+		
+		</select>
+  		</label>
+  		
+  		<br>
+  		
+  		<button type="submit"  onclick="submitform()">Stimme abgeben</button>
+  		
+  		
+  	</form>
+
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet"  type="text/css" href="styleE.css"/>
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Eventmaker</title>
+	<script type="text/javascript">
+	function submitform(){
+        var formElement = document.querySelector("form");
+        var formData = new FormData(formElement);
+        var jsonObject = {};
+        for(const [key,value] of formData.entries()){
+        	jsonObject[key] = value;
+        }
+		fetch(formElement.action,{
+		method: formElement.method,
+		headers: {
+			'Content-Type': 'application/json'
+		},
+	
+		body: JSON.stringify(jsonObject)
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+		})
+	}
+	 
+	 </script>
+</head>
+<body >
+	
+	
+	<form action="http://localhost:8080/teamevents/events" method="POST" name="Eventmaker">
+		<h1>Event-Maker </h1>
+		<p> Eventname: </p>
+		
+		
+		<label for="Eventname" class="selecter"></label>
+  		<input name="eventName"  id="Eventname" >
+		
+		
+		
+		<br>
+		
+		<p> Von: </p>
+		
+		<label for="Beginn" class="selecter">Datum:</label>
+  		<input name="eventDayStart"  id="Beginn" >
+  		
+  		<label for="Beginn" class="selecter">Uhrzeit:</label>
+  		<input name="eventStart"  id="Beginn" >
+  		
+  		
+  		
+  		<br>
+  		
+  		<p>Bis:</p>
+  		
+  		<label for="Ende" class="selecter">Datum:</label>
+  		<input name="eventDayEnd"  id="Ende" >
+  		
+  		<label for="Ende" class="selecter">Uhrzeit:</label>
+  		<input name="eventEnd"  id="Ende" >
+  		
+  		<br>
+  		
+  		<button type="submit"  onclick="submitform()">Event generieren</button>
+  		
+  		
+  	</form>
+
+
+
+</body>
+
+
+</html>
