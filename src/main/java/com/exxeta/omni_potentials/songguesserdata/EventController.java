@@ -16,6 +16,7 @@ public class EventController {
 	private List<Event> events;
 	private final EventRepository repository;
 	
+	// aus Datenbank laden
 	public EventController(EventRepository repository) {
 		events = new ArrayList<Event>();
 		this.repository = repository;
@@ -36,15 +37,21 @@ public class EventController {
 	
 	@PostMapping("/teamevents/events")
 	public void createNewEvent(String eventName, String eventDayStart, String eventStart, String eventDayEnd, String eventEnd) {
+		// Strings werden in Daten und Uhrzeiten gewandelt
 		DateTimeFormatter parser1 = DateTimeFormatter.ofPattern("yyyy MM dd");
 		LocalDate eventDayStart1 = LocalDate.parse(eventDayStart,parser1);
+		
 		DateTimeFormatter parser2 = DateTimeFormatter.ofPattern("H:mm:ss");
 		LocalTime eventStart1 = LocalTime.parse(eventStart,parser2);
+		
 		DateTimeFormatter parser3 = DateTimeFormatter.ofPattern("yyyy MM dd");
 		LocalDate eventDayEnd1 = LocalDate.parse(eventDayEnd,parser3);
+		
 		DateTimeFormatter parser4 = DateTimeFormatter.ofPattern("H:mm:ss");
 		LocalTime eventEnd1 = LocalTime.parse(eventEnd,parser4);
+		
 		Event newEvent = new Event( eventName , eventDayStart1, eventStart1, eventDayEnd1, eventEnd1 );
+		// überprüfen auf Duplicate
 		for(int i = 0 ; i < events.size(); i++) {
 			if( eventName.equals(events.get(i).getname())) {
 				add = false;

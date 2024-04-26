@@ -3,16 +3,6 @@ package com.exxeta.omni_potentials.songguesserdata;
 
 
 
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-
-
-
 public class GuessResult {
 	
 	

@@ -16,7 +16,7 @@ public class SongController {
 	private final SongRepository repository;
 	private final EventRepository eventrepository;
 	
-	
+	// aus Datenbank laden
 	public SongController(SongRepository repository, EventRepository eventrepository) {
 		songs = new ArrayList<Song>();
 		this.repository = repository;
@@ -40,9 +40,12 @@ public class SongController {
 	
 	@PostMapping("/teamsongs/songs")
 	public void createNewSong(String eventName, String start, String duration, String songName, String submitter) {
+		// umwandeln der Strings
 		DateTimeFormatter parser = DateTimeFormatter.ofPattern("H:mm:ss");
 		LocalTime start1 = LocalTime.parse(start,parser);
+		
 		int durationInSec = Integer.parseInt(duration);
+		
 		Event loadedevent = eventrepository.findById(eventName).get();
 		Song newSong = new Song( loadedevent, start1,  durationInSec, songName, new Person(submitter));
 		songs.add(newSong);

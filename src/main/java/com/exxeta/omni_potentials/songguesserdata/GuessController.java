@@ -13,18 +13,18 @@ public class GuessController {
 	
 	private List<Guess> guesses;
 	private final GuessRepository guessRepository;
-	private final SongRepository songRepository; //wird nicht genutzt
+	private final SongRepository songRepository; 
 	int counter = 0;
 	
-	
+	// aus Datenbank laden
 	public GuessController(GuessRepository guessRepository, SongRepository songRepository) {
 		guesses = new ArrayList<Guess>();
 		this.guessRepository = guessRepository;
 		this.songRepository = songRepository;
-//		List<Guess> list = guessRepository.findAll();
-//		if(!list.isEmpty()) {
-//			guesses.addAll(list);
-//		}
+		List<Guess> list = guessRepository.findAll();
+		if(!list.isEmpty()) {
+			guesses.addAll(list);
+		}
 	}
 	
 	
@@ -38,18 +38,18 @@ public class GuessController {
 	
 	public List<GuessResult> createNewResult(List<Song> all, List<Guess> allGuesses) {
 		List<GuessResult> counts = new ArrayList<GuessResult>();
-		//Schleife um guesses
+		//Schleife um Guess Liste
 		for(int e = 0; e < allGuesses.size(); e++) {
-			//hier sollen die dann counts hinzugefügt werden 
+			//add results
 			GuessResult result = new GuessResult(allGuesses.get(e).getGuesser());
-			if(isAlreadyInList(counts, result))
+			if(!isAlreadyInList(counts, result))
 			counts.add(result); 
 		}
 		return counts;
 	}
 	
 	private boolean isAlreadyInList(List<GuessResult> counts, GuessResult result) {
-		//Schleife für counts
+		//Schleife um counts zum überprüfen auf Duplicate
 		for(int i = 0; i < counts.size(); i++) {
 			if(counts.get(i).getGuesser().getName1().equals(result.getGuesser().getName1())) {
 			return true; 
@@ -63,19 +63,18 @@ public class GuessController {
 
 	public List<GuessResult> calculateGuessResults(List<Song> allSongs, List<Guess> allGuesses) {
 		List<GuessResult> counts = createNewResult(allSongs, allGuesses);
-		//Schleife für Songs 
+		//Schleife um Song Liste
 		for(int i = 0; i < allSongs.size(); i++){
-			//Schleife für alle guesses 
+			//Schleife um Guess Liste 
 			for(int e = 0; e < allGuesses.size(); e++) {
-				//  wenn guess zwischen start und ende ist dann verzweigung
+				//  Guess wird geprüft auf den richtigen Zeitraum 
 				if(isGuessAfterSongStart(allSongs, allGuesses, i, e) && isGuessBeforeSongEnd(allSongs, allGuesses, i, e)) {
-					// weiter verzweigen wenn die submitter gleich sind(richtig geraten)
+					// Guess wird geprüft ob richtig geraten
 					if(allGuesses.get(e).getSubmitter().equals(allSongs.get(i).getSubmitter())){
-						// Schleife für counts
+						// Schleife um counts
 						for(int a = 0; a < counts.size(); a++) {
-							//verzweigen wenn die Person mit dem Guesser aus dem Guess übereinstimmt
+							// nach richtigen Guesser gesucht um Punktzahl zu erhöhen
 							if(counts.get(a).getGuesser().getName1().equals(allGuesses.get(e).getGuesser().getName1())) {
-								//Puunkte für die Person werden erhöt
 								counts.get(a).increasePoints();
 							}
 						}	
@@ -86,15 +85,12 @@ public class GuessController {
 		return counts;
 	}
 
-	//Test
-	private boolean isGuessBeforeSongEnd(List<Song> all, List<Guess> allGuesses, int i, int e) {
-		System.out.println(all.size());
-		return allGuesses.get(e).getTimestamp().toLocalTime().isBefore(all.get(i).getStart().plusSeconds(all.get(i).getDuration()));
+	private boolean isGuessBeforeSongEnd(List<Song> allSongs, List<Guess> allGuesses, int i, int e) {
+		return allGuesses.get(e).getTimestamp().toLocalTime().isBefore(allSongs.get(i).getStart().plusSeconds(allSongs.get(i).getDuration()));
 	}
 
-	//Test
-	private boolean isGuessAfterSongStart(List<Song> all, List<Guess> allGuesses, int i, int e) {
-		return allGuesses.get(e).getTimestamp().getSecond() >= all.get(i).getStart().getSecond();
+	private boolean isGuessAfterSongStart(List<Song> allSongs, List<Guess> allGuesses, int i, int e) {
+		return allGuesses.get(e).getTimestamp().toLocalTime().isAfter(allSongs.get(i).getStart());
 	}
 
 

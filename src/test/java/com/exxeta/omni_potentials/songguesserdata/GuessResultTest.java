@@ -12,13 +12,14 @@ import org.junit.jupiter.api.Test;
 
 class GuessResultTest {
 
+	// Algorythmustest
 	@Test
 	void test() {
-		Person submitter1 = new Person("Kilian Voigt");
-		Person submitter2 = new Person("Ilona Breidt");
-		Person submitter3 = new Person("Louis Roth");
-		Person submitter4 = new Person("Hannah Freter");
-		Person submitter5 = new Person("Wer Auch Immer");
+		Person submitter1 = new Person("PersonA");
+		Person submitter2 = new Person("PersonB");
+		Person submitter3 = new Person("PersonC");
+		Person submitter4 = new Person("PersonD");
+		Person submitter5 = new Person("PersonE");
 
 		LocalDate eventDate = LocalDate.of(2024, 5, 20);
 		LocalTime eventTimeStart = LocalTime.of(17, 0);
@@ -27,49 +28,49 @@ class GuessResultTest {
 
 		LocalTime eventTime = eventTimeStart;
 		Song song11 = new Song(event, eventTime, 240, "Song11", submitter1);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song12 = new Song(event, eventTime, 240, "Song12", submitter1);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song13 = new Song(event, eventTime, 240, "Song13", submitter1);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song14 = new Song(event, eventTime, 240, "Song14", submitter2);
 		eventTime.plusSeconds(240);
 		
 		Song song15 = new Song(event, eventTime, 240, "Song15", submitter2);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song16 = new Song(event, eventTime, 240, "Song16", submitter2);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song17 = new Song(event, eventTime, 240, "Song17", submitter3);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song18 = new Song(event, eventTime, 240, "Song18", submitter3);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song19 = new Song(event, eventTime, 240, "Song19", submitter3);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song20 = new Song(event, eventTime, 240, "Song20", submitter4);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song21 = new Song(event, eventTime, 240, "Song21", submitter4);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song22 = new Song(event, eventTime, 240, "Song22", submitter4);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song23 = new Song(event, eventTime, 240, "Song23", submitter5);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song24 = new Song(event, eventTime, 240, "Song24", submitter5);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		
 		Song song25 = new Song(event, eventTime, 240, "Song25", submitter5);
-		eventTime.plusSeconds(240);
+		eventTime = eventTime.plusSeconds(240);
 		//und so weiter
 		
 		List<Song> songs = new ArrayList<Song>();
@@ -428,7 +429,7 @@ class GuessResultTest {
 		
 		GuessController guessController = new GuessController(null, null);
 		List<GuessResult> guessResults = guessController.calculateGuessResults(songs, guesses);
-		assertEquals(3, guessResults.get(0).getPoints(), "Kilian has three points");
+		assertEquals(3, guessResults.get(0).getPoints(), "PersonA has three points");
 		
 		
 	}
